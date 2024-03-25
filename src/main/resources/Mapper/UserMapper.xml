@@ -1,0 +1,14 @@
+<mapper namespace="user">
+    <!--唯一标识：*.*  statementId-->
+    <select id="selectList" resultType="com.lulu040108.DAO.User">
+        select * from user
+    </select>
+
+    <select id="selectOne" resultType="com.lulu040108.DAO.User" parameterType="com.lulu040108.DAO.User">
+        select * from user where id = #{id} and username= #{username}
+    </select>
+
+    <updata>
+
+    </updata>
+</mapper>
