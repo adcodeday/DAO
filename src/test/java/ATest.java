@@ -1,6 +1,6 @@
-import com.lulu040108.io.Resources;
-import com.lulu040108.sqlSession.SqlSessionFactory;
-import com.lulu040108.sqlSession.SqlSessionFactoryBuilder;
+import com.lulu040108.DAO.config.io.Resources;
+import com.lulu040108.DAO.config.sqlSession.SqlSessionFactory;
+import com.lulu040108.DAO.config.sqlSession.SqlSessionFactoryBuilder;
 import org.dom4j.DocumentException;
 import org.junit.Test;
 

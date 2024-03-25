@@ -1,7 +1,7 @@
-package com.lulu040108.sqlSession;
+package com.lulu040108.DAO.config.sqlSession;
 
-import com.lulu040108.config.XMLConfigBuilder;
-import com.lulu040108.pojo.Configuration;
+import com.lulu040108.DAO.config.XMLConfigBuilder;
+import com.lulu040108.DAO.config.pojo.Configuration;
 import org.dom4j.DocumentException;
 
 import java.io.InputStream;
