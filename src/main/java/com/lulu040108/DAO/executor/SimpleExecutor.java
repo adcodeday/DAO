@@ -7,10 +7,15 @@ import com.lulu040108.DAO.utils.GenericTokenParser;
 import com.lulu040108.DAO.utils.ParameterMapping;
 import com.lulu040108.DAO.utils.ParameterMappingTokenHandler;
 
+import java.beans.ParameterDescriptor;
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleExecutor implements Executor {
@@ -46,8 +51,28 @@ public class SimpleExecutor implements Executor {
         //执行Sql
         ResultSet resultSet = preparedStatement.executeQuery();
         //处理返回结果集
+        ArrayList<Object> list=new ArrayList<>();
+        while (resultSet.next()){
+            String resultType= mappedStatement.getResultType();
+            Class<?> resultTypeClass = Class.forName(resultType);
+            Object o=resultTypeClass.newInstance();
+            ResultSetMetaData metaData= resultSet.getMetaData();
 
-        return null;
+            for (int i = 1; i <= metaData.getColumnCount(); i++) {
+                //字段名
+                String columName=metaData.getColumnName(i);
+                //字段的值
+                Object value=resultSet.getObject(columName);
+                //进行封装
+                //属性描述器，通过API获取某个属性的读写方法
+                PropertyDescriptor propertyDescriptor = new PropertyDescriptor(columName, resultTypeClass);
+                Method writeMethod = propertyDescriptor.getWriteMethod();
+                //参数1：实例对象。参数2：要设置的值
+                writeMethod.invoke(o,value);
+            }
+            list.add((E)o);
+        }
+        return (List<E>) list;
     }
 
     private BoundSql getBoundSql(String sql){

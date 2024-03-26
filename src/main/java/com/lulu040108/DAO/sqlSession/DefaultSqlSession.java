@@ -18,7 +18,7 @@ public class DefaultSqlSession implements SqlSession{
     }
 
     @Override
-    public <E> List<E> selectList(String statementId, Object param) {
+    public <E> List<E> selectList(String statementId, Object param) throws Exception {
         //将查询操作委派给底层的执行器
         //传入数据库配置信息和sql配置信息
         MappedStatement mappedStatement = configuration.getMappedStatementMap().get(statementId);
@@ -27,7 +27,7 @@ public class DefaultSqlSession implements SqlSession{
     }
 
     @Override
-    public <T> T selectOne(String statementId, Object param) {
+    public <T> T selectOne(String statementId, Object param) throws Exception {
         //调用selectList方法
         List<Object> list = selectList(statementId, param);
         if(list.size() == 1){
