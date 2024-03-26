@@ -1,4 +1,4 @@
-package com.lulu040108.DAO.config.pojo;
+package com.lulu040108.DAO.pojo;
 
 import javax.sql.DataSource;
 import java.util.HashMap;

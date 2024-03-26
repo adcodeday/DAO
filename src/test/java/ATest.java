@@ -1,6 +1,8 @@
-import com.lulu040108.DAO.config.io.Resources;
-import com.lulu040108.DAO.config.sqlSession.SqlSessionFactory;
-import com.lulu040108.DAO.config.sqlSession.SqlSessionFactoryBuilder;
+import com.lulu040108.DAO.io.Resources;
+import com.lulu040108.DAO.sqlSession.SqlSession;
+import com.lulu040108.DAO.sqlSession.SqlSessionFactory;
+import com.lulu040108.DAO.sqlSession.SqlSessionFactoryBuilder;
+import com.mysql.cj.Session;
 import org.dom4j.DocumentException;
 import org.junit.Test;
 
@@ -14,6 +16,8 @@ public class ATest {
     public void test01() throws DocumentException {
         InputStream inputStream= Resources.getResourceAsStream("sqlMapConfig.xml");
         SqlSessionFactory sqlSessionFactory=new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSession sqlsession=sqlSessionFactory.openSession();
+//        sqlsession.selectOne("user.selectOne")
 
     }
 }

@@ -1,4 +1,4 @@
- package com.lulu040108.DAO.config.pojo;
+ package com.lulu040108.DAO.pojo;
 
 /**
  * 映射配置类：存放mapper.xml解析内容

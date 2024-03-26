@@ -1,8 +1,8 @@
 package com.lulu040108.DAO.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.lulu040108.DAO.config.io.Resources;
-import com.lulu040108.DAO.config.pojo.Configuration;
+import com.lulu040108.DAO.io.Resources;
+import com.lulu040108.DAO.pojo.Configuration;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;

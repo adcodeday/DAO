@@ -1,4 +1,4 @@
-package com.lulu040108.DAO.config.io;
+package com.lulu040108.DAO.io;
 
 import java.io.InputStream;
 

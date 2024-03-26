@@ -1,7 +1,7 @@
 package com.lulu040108.DAO.config;
 
-import com.lulu040108.DAO.config.pojo.Configuration;
-import com.lulu040108.DAO.config.pojo.MappedStatement;
+import com.lulu040108.DAO.pojo.Configuration;
+import com.lulu040108.DAO.pojo.MappedStatement;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
