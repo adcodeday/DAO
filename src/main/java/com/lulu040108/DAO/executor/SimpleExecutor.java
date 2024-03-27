@@ -11,25 +11,25 @@ import java.beans.ParameterDescriptor;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleExecutor implements Executor {
+    private Connection connection=null;
+    private PreparedStatement preparedStatement=null;
+    private ResultSet resultSet=null;
 
     @Override
     public <E> List<E> query(Configuration configuration, String statementId, MappedStatement mappedStatement, Object param) throws Exception {
         //加载驱动获取数据库链接
-        Connection connection = configuration.getDataSource().getConnection();
+        connection = configuration.getDataSource().getConnection();
 
         //获取preparedStatement预编译对象
         String sql = mappedStatement.getSql();
         BoundSql boundSql=getBoundSql(sql);
         String finalSql=boundSql.getFinalSql();
-        PreparedStatement preparedStatement = connection.prepareStatement(finalSql);
+        preparedStatement = connection.prepareStatement(finalSql);
 
         //3.设置参数
         String parameterType= mappedStatement.getParameterType();
@@ -49,9 +49,9 @@ public class SimpleExecutor implements Executor {
             preparedStatement.setObject(i+1,value);
         }
         //执行Sql
-        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet = preparedStatement.executeQuery();
         //处理返回结果集
-        ArrayList<Object> list=new ArrayList<>();
+        ArrayList<E> list=new ArrayList<>();
         while (resultSet.next()){
             String resultType= mappedStatement.getResultType();
             Class<?> resultTypeClass = Class.forName(resultType);
@@ -72,7 +72,7 @@ public class SimpleExecutor implements Executor {
             }
             list.add((E)o);
         }
-        return (List<E>) list;
+        return list;
     }
 
     private BoundSql getBoundSql(String sql){
@@ -88,6 +88,26 @@ public class SimpleExecutor implements Executor {
     }
     @Override
     public void close() {
-
+        if (resultSet != null) {
+            try {
+                resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (preparedStatement != null) {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

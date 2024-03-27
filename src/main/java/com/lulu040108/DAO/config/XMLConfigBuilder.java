@@ -35,9 +35,9 @@ public class XMLConfigBuilder {
         //创建数据源对象
         DruidDataSource druidDataSource = new DruidDataSource();
         druidDataSource.setDriverClassName(properties.getProperty("driverClassName"));
-        druidDataSource.setUrl("url");
-        druidDataSource.setUsername("username");
-        druidDataSource.setPassword("password");
+        druidDataSource.setUrl(properties.getProperty("url"));
+        druidDataSource.setUsername(properties.getProperty("username"));
+        druidDataSource.setPassword(properties.getProperty("password"));
         configuration.setDataSource(druidDataSource);
         List<Element> mapperList= rootElement.selectNodes("//mapper");
         for(Element mapper:mapperList){

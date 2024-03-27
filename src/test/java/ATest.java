@@ -1,3 +1,4 @@
+import com.lulu040108.DAO.TestClass.User;
 import com.lulu040108.DAO.io.Resources;
 import com.lulu040108.DAO.sqlSession.SqlSession;
 import com.lulu040108.DAO.sqlSession.SqlSessionFactory;
@@ -13,11 +14,15 @@ import java.io.InputStream;
  */
 public class ATest {
     @Test
-    public void test01() throws DocumentException {
+    public void test01() throws Exception {
         InputStream inputStream= Resources.getResourceAsStream("sqlMapConfig.xml");
         SqlSessionFactory sqlSessionFactory=new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlsession=sqlSessionFactory.openSession();
 //        sqlsession.selectOne("user.selectOne")
-
+        User user=new User();
+        user.setId(1);
+        user.setUsername("tom");
+        User o = sqlsession.selectOne("user.selectOne", user);
+        System.out.println(o);
     }
 }

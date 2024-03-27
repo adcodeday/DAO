@@ -1,13 +1,15 @@
 <configuration>
      <datasource>
          <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-         <property name="url" value="jdbc:mysql:///lulutest"></property>
+         <property name="url" value="jdbc:mysql:///lulutest?useSSL=false&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC"></property>
          <property name="username" value="root"></property>
          <property name="password" value="qq2388286985"></property>
+
+
      </datasource>
     <!--引入映射配置文件-->
     <mappers>
-        <maaper resource="mapper/UserMapper.xml"></maaper>
+        <mapper resource="mapper/UserMapper.xml"></mapper>
     </mappers>
 
 </configuration>
