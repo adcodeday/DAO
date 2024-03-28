@@ -1,10 +1,9 @@
-import com.lulu040108.DAO.TestClass.User;
+import com.lulu040108.DAO.dao.IUserDao;
+import com.lulu040108.DAO.dao.User;
 import com.lulu040108.DAO.io.Resources;
 import com.lulu040108.DAO.sqlSession.SqlSession;
 import com.lulu040108.DAO.sqlSession.SqlSessionFactory;
 import com.lulu040108.DAO.sqlSession.SqlSessionFactoryBuilder;
-import com.mysql.cj.Session;
-import org.dom4j.DocumentException;
 import org.junit.Test;
 
 import java.io.InputStream;
@@ -19,10 +18,13 @@ public class ATest {
         SqlSessionFactory sqlSessionFactory=new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlsession=sqlSessionFactory.openSession();
 //        sqlsession.selectOne("user.selectOne")
-        User user=new User();
+        User user = new User();
         user.setId(1);
         user.setUsername("tom");
-        User o = sqlsession.selectOne("user.selectOne", user);
-        System.out.println(o);
+        IUserDao mapper = sqlsession.getMapper(IUserDao.class);
+        User byCondition = mapper.findByCondition(user);
+        System.out.println(byCondition);
+        sqlsession.close();
+
     }
 }

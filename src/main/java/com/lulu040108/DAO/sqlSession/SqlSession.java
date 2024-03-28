@@ -15,4 +15,5 @@ public interface SqlSession {
      * 清除资源
      */
     void close();
+    <T> T getMapper(Class<T> mapperClass);
 }

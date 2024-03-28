@@ -1,10 +1,10 @@
-<mapper namespace="user">
+<mapper namespace="com.lulu040108.DAO.dao.IUserDao">
     <!--唯一标识：*.*  statementId-->
-    <select id="selectList" resultType="com.lulu040108.DAO.TestClass.User">
+    <select id="findAll" resultType="com.lulu040108.DAO.dao.User">
         select * from user
     </select>
 
-    <select id="selectOne" resultType="com.lulu040108.DAO.TestClass.User" parameterType="com.lulu040108.DAO.TestClass.User">
+    <select id="findByCondition" resultType="com.lulu040108.DAO.dao.User" parameterType="com.lulu040108.DAO.dao.User">
         select * from user where id = #{id} and username= #{username}
     </select>
 

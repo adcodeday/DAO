@@ -1,4 +1,4 @@
-package com.lulu040108.DAO.TestClass;
+package com.lulu040108.DAO.dao;
 
 public class User {
     private int id;
